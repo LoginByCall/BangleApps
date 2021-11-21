@@ -4,7 +4,7 @@ const H = g.getWidth();
 const W = g.getHeight();
 let running = true;
 let score = 0;
-let d;
+let d = "r";
 const gridSize = 20;
 const tileSize = 6;
 let nextX = 0;
@@ -111,7 +111,67 @@ function draw() {
   g.flip();
 }
 
-// input
+// Alternative control method.
+setWatch(() => {
+  switch (d){
+    case "u": {
+      nextX = 1;
+      nextY = 0;
+      d = "r";
+      }
+      break;
+    case "r": {
+      nextX = 0;
+      nextY = -1;
+      d = "d";
+      }
+      break;
+    case "d": {
+      nextX = -1;
+      nextY = 0;
+      d = "l";
+      }
+      break;
+    case "l": {
+      nextX = 0;
+      nextY = 1;
+      d = "u";
+      }
+      break;
+  }
+}, BTN1, { repeat: true });
+
+setWatch(() => {
+  switch (d){
+    case "u": {
+      nextX = -1;
+      nextY = 0;
+      d = "l";
+      }
+      break;
+    case "r": {
+      nextX = 0;
+      nextY = 1;
+      d = "u";
+      }
+      break;
+    case "d": {
+      nextX = 1;
+      nextY = 0;
+      d = "r";
+      }
+      break;
+    case "l": {
+      nextX = 0;
+      nextY = -1;
+      d = "d";
+      }
+      break;
+  }
+}, BTN3, { repeat: true });
+
+// Original control method. 
+/*
 setWatch(() => {// Up
   if (d !== 'd') {
     nextX = 0;
@@ -119,6 +179,7 @@ setWatch(() => {// Up
     d = 'u';
   }
 }, BTN1, { repeat: true });
+
 setWatch(() => {// Down
   if (d !== 'u') {
     nextX = 0;
@@ -126,6 +187,7 @@ setWatch(() => {// Down
     d = 'd';
   }
 }, BTN3, { repeat: true });
+
 setWatch(() => {// Left
   if (d !== 'r') {
     nextX = -1;
@@ -133,6 +195,7 @@ setWatch(() => {// Left
     d = 'l';
   }
 }, BTN4, { repeat: true });
+
 setWatch(() => {// Right
   if (d !== 'l') {
     nextX = 1;
@@ -140,6 +203,8 @@ setWatch(() => {// Right
     d = 'r';
   }
 }, BTN5, { repeat: true });
+*/
+
 setWatch(() => {// Pause
   running = !running;
 }, BTN2, { repeat: true });
